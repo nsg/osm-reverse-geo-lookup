@@ -41,7 +41,7 @@ class RelationHandler(osmium.SimpleHandler):
             return
 
         admin_level = r.tags.get("admin_level")
-        if admin_level != ADMIN_LEVEL_1 or admin_level != ADMIN_LEVEL_2 or admin_level != ADMIN_LEVEL_3:
+        if admin_level != ADMIN_LEVEL_1 and admin_level != ADMIN_LEVEL_2 and admin_level != ADMIN_LEVEL_3:
             return
 
         if admin_level == ADMIN_LEVEL_1:
