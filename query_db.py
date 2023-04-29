@@ -20,6 +20,6 @@ if __name__ == '__main__':
     with open(DB_FILE, 'r') as file:
         db = json.load(file)
 
-    for name, data in db:
+    for name, level, data in db:
         if comp(data, point):
-            print(name)
+            print(name, level)

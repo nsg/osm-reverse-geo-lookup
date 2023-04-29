@@ -8,20 +8,32 @@ on:
 
 jobs:
   build:
+    runs-on: ubuntu-latest
+
     strategy:
       matrix:
         include:
           - country: "sweden"
+            ADMIN_LEVEL_1: 2
+            ADMIN_LEVEL_2: 4
             ADMIN_LEVEL_3: 7
           - country: "norway"
+            ADMIN_LEVEL_1: 2
+            ADMIN_LEVEL_2: 4
             ADMIN_LEVEL_3: 7
           - country: "finland"
+            ADMIN_LEVEL_1: 2
+            ADMIN_LEVEL_2: 4
             ADMIN_LEVEL_3: 7
           - country: "denmark"
+            ADMIN_LEVEL_1: 2
+            ADMIN_LEVEL_2: 4
             ADMIN_LEVEL_3: 7
           - country: "iceland"
+            ADMIN_LEVEL_1: 2
+            ADMIN_LEVEL_2: 4
             ADMIN_LEVEL_3: 7
-    runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
       - name: Install dependencies
@@ -33,5 +45,5 @@ jobs:
       - name: Active outout
         uses: actions/upload-artifact@v3
         with:
-          name: database
+          name: nordic-countries
           path: europe-${{ matrix.country }}.osm.pbf

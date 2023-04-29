@@ -40,14 +40,22 @@ class RelationHandler(osmium.SimpleHandler):
         if r.tags.get("boundary") != "administrative":
             return
 
-        if r.tags.get("admin_level") != ADMIN_LEVEL_3:
+        admin_level = r.tags.get("admin_level")
+        if admin_level != ADMIN_LEVEL_1 or admin_level != ADMIN_LEVEL_2 or admin_level != ADMIN_LEVEL_3:
             return
+
+        if admin_level == ADMIN_LEVEL_1:
+            admin_level_ident = 1
+        elif admin_level == ADMIN_LEVEL_2:
+            admin_level_ident = 2
+        else:
+            admin_level_ident = 3
 
         ways = []
         for m in r.members:
             ways.append(m.ref)
             self.lookup_ways.append(m.ref)
-        self.boundaries.append((r.tags.get("name"), ways))
+        self.boundaries.append((r.tags.get("name"), admin_level_ident, ways))
 
 
 def main():
@@ -66,7 +74,7 @@ def main():
 
     coords = []
 
-    for boundary_name, boundary_data in osm_b.boundaries:
+    for boundary_name, admin_level, boundary_data in osm_b.boundaries:
         """ Loop over boundaries, like Huvudsta """
 
         data = []
@@ -78,8 +86,8 @@ def main():
 
                 data.append((c.y / 10000000.0, c.x / 10000000.0))
 
-        print(f"Found {boundary_name}")
-        coords.append((boundary_name, data))
+        print(f"Found {boundary_name} ({admin_level})")
+        coords.append((boundary_name, admin_level, data))
 
     with open(DB_FILE, "w") as outfile:
         outfile.write(json.dumps(coords))
