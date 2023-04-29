@@ -2,7 +2,7 @@
 
 Generate a filtered down database from OSM data that can be used for reverse geo lookups.
 
-Going from just a single coordinate (latitude, longitude) to a area can be heavy to calculate. The most simple solution is to build a database of locations and then look for the closest known spot. The problem is that an area is not well defined by a single location, so let's assume we pick the city center as our location. Consider the example below. We have tree cities close together. From left to right. City Red, City Purple and City Yellow. Location A is clearly inside the borders of city purple, but it's physically closer to the Red cities center so this simple algorithm will place A in the incorrect city.
+Going from just a single coordinate (latitude, longitude) to a area can be heavy to calculate. The most simple solution is to build a database of locations and then look for the closest known spot. The problem is that an area is not well defined by a single location, so let's assume we pick the city center as our location. Consider the example below. We have three cities close together. From left to right. City Red, City Purple and City Yellow. Location A is clearly inside the borders of city purple, but it's physically closer to the Red cities center so this simple algorithm will place A in the incorrect city.
 
 ![](closest-match.png)
 
