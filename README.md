@@ -33,5 +33,6 @@ Stockholms kommun
 
 ## License
 
-* The code is licensed under the MIT License.
-* The database-files are licensed under [Open Data Commons Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/)
+The code is licensed under the MIT License.
+
+The reverse geo database is made available under the Open Database License: http://opendatacommons.org/licenses/odbl/1.0/. Any rights in individual contents of the database are licensed under the Database Contents License: http://opendatacommons.org/licenses/dbcl/1.0/
