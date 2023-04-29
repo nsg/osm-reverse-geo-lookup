@@ -1,4 +1,5 @@
 import sys
+import os
 import json
 
 import osmium
@@ -9,6 +10,10 @@ import osmium
 # DB_FILE = "stockholm.db"
 OSM_PBF = sys.argv[1]
 DB_FILE = sys.argv[2]
+
+ADMIN_LEVEL_1 = os.getenv("ADMIN_LEVEL_1")
+ADMIN_LEVEL_2 = os.getenv("ADMIN_LEVEL_2")
+ADMIN_LEVEL_3 = os.getenv("ADMIN_LEVEL_3")
 
 class WayHandler(osmium.SimpleHandler):
     def __init__(self, lookup_ways):
@@ -35,7 +40,7 @@ class RelationHandler(osmium.SimpleHandler):
         if r.tags.get("boundary") != "administrative":
             return
 
-        if r.tags.get("admin_level") != "7":
+        if r.tags.get("admin_level") != ADMIN_LEVEL_3:
             return
 
         ways = []

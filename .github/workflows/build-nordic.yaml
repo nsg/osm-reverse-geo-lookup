@@ -10,7 +10,17 @@ jobs:
   build:
     strategy:
       matrix:
-        country: ["sweden", "norway"]
+        include:
+          - country: "sweden"
+            ADMIN_LEVEL_3: 7
+          - country: "norway"
+            ADMIN_LEVEL_3: 7
+          - country: "finland"
+            ADMIN_LEVEL_3: 7
+          - country: "denmark"
+            ADMIN_LEVEL_3: 7
+          - country: "iceland"
+            ADMIN_LEVEL_3: 7
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
