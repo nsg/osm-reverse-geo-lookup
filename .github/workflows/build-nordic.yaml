@@ -1,4 +1,4 @@
-name: Generate | Sweden
+name: Generate Nordic Countries
 
 on:
   push:
@@ -8,17 +8,20 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        country: ["sweden", "norway"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Download OSM data
-        run: wget https://download.geofabrik.de/europe/sweden-latest.osm.pbf -O data.osm.pbf
+        run: wget https://download.geofabrik.de/europe/${{ matrix.country }}-latest.osm.pbf -O europe-${{ matrix.country }}.osm.pbf
       - name: Process data
-        run: python3 build_db.py data.osm.pbf sweden.db.json
+        run: python3 build_db.py europe-${{ matrix.country }}.osm.pbf europe-${{ matrix.country }}.osm.pbf
       - name: Active outout
         uses: actions/upload-artifact@v3
         with:
           name: database
-          path: sweden.db.json
+          path: europe-${{ matrix.country }}.osm.pbf
