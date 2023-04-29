@@ -1,0 +1,24 @@
+name: Generate | Sweden
+
+on:
+  push:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Download OSM data
+        run: wget https://download.geofabrik.de/europe/sweden-latest.osm.pbf -O data.osm.pbf
+      - name: Process data
+        run: python3 build_db.py data.osm.pbf sweden.db.json
+      - name: Active outout
+        uses: actions/upload-artifact@v3
+        with:
+          name: database
+          path: sweden.db.json
