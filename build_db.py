@@ -41,21 +41,12 @@ class RelationHandler(osmium.SimpleHandler):
             return
 
         admin_level = r.tags.get("admin_level")
-        if admin_level != ADMIN_LEVEL_1 and admin_level != ADMIN_LEVEL_2 and admin_level != ADMIN_LEVEL_3:
-            return
-
-        if admin_level == ADMIN_LEVEL_1:
-            admin_level_ident = 1
-        elif admin_level == ADMIN_LEVEL_2:
-            admin_level_ident = 2
-        else:
-            admin_level_ident = 3
-
-        ways = []
-        for m in r.members:
-            ways.append(m.ref)
-            self.lookup_ways.append(m.ref)
-        self.boundaries.append((r.tags.get("name"), admin_level_ident, ways))
+        if admin_level in [ADMIN_LEVEL_1, ADMIN_LEVEL_2, ADMIN_LEVEL_3]:
+            ways = []
+            for m in r.members:
+                ways.append(m.ref)
+                self.lookup_ways.append(m.ref)
+            self.boundaries.append((r.tags.get("name"), admin_level, ways))
 
 
 def main():
