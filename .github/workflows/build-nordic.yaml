@@ -17,22 +17,22 @@ jobs:
             admin_level_1: 2
             admin_level_2: 4
             admin_level_3: 7
-          # - country: "norway"
-          #   ADMIN_LEVEL_1: 2
-          #   ADMIN_LEVEL_2: 4
-          #   ADMIN_LEVEL_3: 7
-          # - country: "finland"
-          #   ADMIN_LEVEL_1: 2
-          #   ADMIN_LEVEL_2: 4
-          #   ADMIN_LEVEL_3: 7
-          # - country: "denmark"
-          #   ADMIN_LEVEL_1: 2
-          #   ADMIN_LEVEL_2: 4
-          #   ADMIN_LEVEL_3: 7
-          # - country: "iceland"
-          #   ADMIN_LEVEL_1: 2
-          #   ADMIN_LEVEL_2: 4
-          #   ADMIN_LEVEL_3: 7
+          - country: "norway"
+            admin_level_1: 2
+            admin_level_2: 4
+            admin_level_3: 7
+          - country: "finland"
+            admin_level_1: 2
+            admin_level_2: 4
+            admin_level_3: 7
+          - country: "denmark"
+            admin_level_1: 2
+            admin_level_2: 4
+            admin_level_3: 7
+          - country: "iceland"
+            admin_level_1: 2
+            admin_level_2: 4
+            admin_level_3: 7
 
     steps:
       - uses: actions/checkout@v3
