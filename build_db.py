@@ -1,6 +1,7 @@
 import sys
 import os
 import json
+import argparse
 
 import osmium
 
@@ -8,12 +9,6 @@ import osmium
 # DB_FILE = "sweden.db"
 # OSM_PBF = "Stockholm.osm.pbf"
 # DB_FILE = "stockholm.db"
-OSM_PBF = sys.argv[1]
-DB_FILE = sys.argv[2]
-
-ADMIN_LEVEL_1 = os.getenv("ADMIN_LEVEL_1")
-ADMIN_LEVEL_2 = os.getenv("ADMIN_LEVEL_2")
-ADMIN_LEVEL_3 = os.getenv("ADMIN_LEVEL_3")
 
 class WayHandler(osmium.SimpleHandler):
     def __init__(self, lookup_ways):
@@ -28,10 +23,13 @@ class WayHandler(osmium.SimpleHandler):
                self.ways[w.id].append(node.location)
 
 class RelationHandler(osmium.SimpleHandler):
-    def __init__(self):
+    def __init__(self, admin_level1, admin_level2, admin_level3):
         super().__init__()
         self.boundaries = []
         self.lookup_ways = []
+        self.admin_level1 = admin_level1
+        self.admin_level2 = admin_level2
+        self.admin_level3 = admin_level3
 
     def relation(self, r):
         if r.tags.get("type") != "boundary":
@@ -41,7 +39,7 @@ class RelationHandler(osmium.SimpleHandler):
             return
 
         admin_level = r.tags.get("admin_level")
-        if admin_level in [ADMIN_LEVEL_1, ADMIN_LEVEL_2, ADMIN_LEVEL_3]:
+        if admin_level in [self.admin_level1, self.admin_level2, self.admin_level3]:
             ways = []
             for m in r.members:
                 ways.append(m.ref)
@@ -50,19 +48,19 @@ class RelationHandler(osmium.SimpleHandler):
             print(f"Found {r.tags.get('name')} admin_level {admin_level}")
 
 
-def main():
+def main(args):
 
     osm_b = RelationHandler()
-    osm_b.apply_file(OSM_PBF, locations=True, idx='flex_mem')
+    osm_b.apply_file(args.osm_pbf, locations=True, idx='flex_mem')
 
-    print(f"Processing {OSM_PBF}")
+    print(f"Processing {args.osm_pbf}")
     print(f"I have found {len(osm_b.boundaries)} boundaries refering to {len(osm_b.lookup_ways)} ways ({len(set(osm_b.lookup_ways))} unique).")
-    print(f"I will scan {OSM_PBF} to collect these ways with coordinates")
+    print(f"I will scan {args.osm_pbf} to collect these ways with coordinates")
 
     osm_w = WayHandler(osm_b.lookup_ways)
-    osm_w.apply_file(OSM_PBF, locations=True)
+    osm_w.apply_file(args.osm_pbf, locations=True)
 
-    print(f"I found {len(osm_w.ways)} unique matching ways in {OSM_PBF}")
+    print(f"I found {len(osm_w.ways)} unique matching ways in {args.osm_pbf}")
 
     coords = []
 
@@ -81,10 +79,19 @@ def main():
         print(f"Found {boundary_name} ({admin_level})")
         coords.append((boundary_name, admin_level, data))
 
-    with open(DB_FILE, "w") as outfile:
+    with open(args.out_db, "w") as outfile:
         outfile.write(json.dumps(coords))
 
-    print(f"Written state to {DB_FILE}")
+    print(f"Written state to {args.out_db}")
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(prog='build_db',
+                                     description='Build a reverse GEO DB from OSM data')
+    parser.add_argument('osm_pbf')
+    parser.add_argument('out_db')
+    parser.add_argument('-1', help="Admin level 1")
+    parser.add_argument('-2', help="Admin level 2")
+    parser.add_argument('-3', help="Admin level 3")
+
+    args = parser.parse_args()
+    main(args)
