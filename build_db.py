@@ -47,6 +47,7 @@ class RelationHandler(osmium.SimpleHandler):
                 ways.append(m.ref)
                 self.lookup_ways.append(m.ref)
             self.boundaries.append((r.tags.get("name"), admin_level, ways))
+            print(f"Found {r.tags.get('name')} admin_level {admin_level}")
 
 
 def main():
