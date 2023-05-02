@@ -24,7 +24,7 @@ class WayHandler(osmium.SimpleHandler):
 
 class RelationHandler(osmium.SimpleHandler):
     def __init__(self, admin_level1, admin_level2, admin_level3):
-        super().__init__(admin_level1, admin_level2, admin_level3)
+        super().__init__()
         self.boundaries = []
         self.lookup_ways = []
         self.admin_level1 = admin_level1
@@ -50,7 +50,7 @@ class RelationHandler(osmium.SimpleHandler):
 
 def main(args):
 
-    osm_b = RelationHandler()
+    osm_b = RelationHandler(args.a, args.b, args.c)
     osm_b.apply_file(args.osm_pbf, locations=True, idx='flex_mem')
 
     print(f"Processing {args.osm_pbf}")
@@ -89,9 +89,9 @@ if __name__ == '__main__':
                                      description='Build a reverse GEO DB from OSM data')
     parser.add_argument('osm_pbf')
     parser.add_argument('out_db')
-    parser.add_argument('-1', help="Admin level 1")
-    parser.add_argument('-2', help="Admin level 2")
-    parser.add_argument('-3', help="Admin level 3")
+    parser.add_argument('-a', help="Admin level 1")
+    parser.add_argument('-b', help="Admin level 2")
+    parser.add_argument('-c', help="Admin level 3")
 
     args = parser.parse_args()
     main(args)

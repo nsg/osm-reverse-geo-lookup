@@ -41,7 +41,7 @@ jobs:
       - name: Download OSM data
         run: wget https://download.geofabrik.de/europe/${{ matrix.country }}-latest.osm.pbf -O europe-${{ matrix.country }}.osm.pbf
       - name: Process data
-        run: python3 build_db.py europe-${{ matrix.country }}.osm.pbf europe-${{ matrix.country }}.json.db -1 ${{ matrix.admin_level_1 }} -2 ${{ matrix.admin_level_2 }} -3 ${{ matrix.admin_level_3 }}
+        run: python3 build_db.py europe-${{ matrix.country }}.osm.pbf europe-${{ matrix.country }}.json.db -a ${{ matrix.admin_level_1 }} -b ${{ matrix.admin_level_2 }} -c ${{ matrix.admin_level_3 }}
       - name: Active outout
         uses: actions/upload-artifact@v3
         with:
