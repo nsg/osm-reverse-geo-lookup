@@ -24,7 +24,7 @@ class WayHandler(osmium.SimpleHandler):
 
 class RelationHandler(osmium.SimpleHandler):
     def __init__(self, admin_level1, admin_level2, admin_level3):
-        super().__init__()
+        super().__init__(admin_level1, admin_level2, admin_level3)
         self.boundaries = []
         self.lookup_ways = []
         self.admin_level1 = admin_level1
