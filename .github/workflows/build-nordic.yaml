@@ -14,25 +14,25 @@ jobs:
       matrix:
         include:
           - country: "sweden"
-            admin_level_1: 2
-            admin_level_2: 4
-            admin_level_3: 7
+            admin_level_1: "Sverige"
+            admin_level_2: "Stockholms län"
+            admin_level_3: "Stockholms kommun"
           - country: "norway"
-            admin_level_1: 2
-            admin_level_2: 4
-            admin_level_3: 7
+            admin_level_1: "Norge"
+            admin_level_2: "Vestland"
+            admin_level_3: "Bergen"
           - country: "finland"
-            admin_level_1: 2
-            admin_level_2: 4
-            admin_level_3: 7
+            admin_level_1: "Suomi / Finland"
+            admin_level_2: "Varsinais-Suomi"
+            admin_level_3: "Turku"
           - country: "denmark"
-            admin_level_1: 2
-            admin_level_2: 4
-            admin_level_3: 7
+            admin_level_1: "Danmark"
+            admin_level_2: "Region Midtjylland"
+            admin_level_3: "Aarhus Kommune"
           - country: "iceland"
-            admin_level_1: 2
-            admin_level_2: 4
-            admin_level_3: 7
+            admin_level_1: "Ísland"
+            admin_level_2: "Höfuðborgarsvæðið"
+            admin_level_3: "Reykjavíkurborg"
 
     steps:
       - uses: actions/checkout@v3
@@ -48,9 +48,9 @@ jobs:
           build_db.py
           europe-${{ matrix.country }}.osm.pbf
           europe-${{ matrix.country }}.json.db
-          -a ${{ matrix.admin_level_1 }}
-          -b ${{ matrix.admin_level_2 }}
-          -c ${{ matrix.admin_level_3 }}
+          -alfa "${{ matrix.admin_level_1 }}"
+          -beta "${{ matrix.admin_level_2 }}"
+          -gamma "${{ matrix.admin_level_3 }}"
       - name: Active outout
         uses: actions/upload-artifact@v3
         with:

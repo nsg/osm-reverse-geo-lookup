@@ -47,16 +47,56 @@ class RelationHandler(osmium.SimpleHandler):
             self.boundaries.append((r.tags.get("name"), admin_level, ways))
             print(f"Found {r.tags.get('name')} admin_level {admin_level}")
 
+class AdminLevelsHandler(osmium.SimpleHandler):
+    def __init__(self, alfa, beta, gamma):
+        super().__init__()
+        self._alfa = alfa
+        self._beta = beta
+        self._gamma = gamma
+
+        self.alfa = None
+        self.beta = None
+        self.gamma = None
+
+    def relation(self, r):
+        if r.tags.get("type") != "boundary":
+            return
+        
+        if r.tags.get("boundary") != "administrative":
+            return
+        
+        if r.tags.get("name") == self._alfa:
+            self.alfa = r.tags.get("admin_level")
+
+        if r.tags.get("name") == self._beta:
+            self.beta = r.tags.get("admin_level")
+
+        if r.tags.get("name") == self._gamma:
+            self.gamma = r.tags.get("admin_level")
+
 
 def main(args):
 
-    osm_b = RelationHandler(args.a, args.b, args.c)
+    print("Looking for administrative levels ...")
+    al = AdminLevelsHandler(args.alfa, args.beta, args.gamma)
+    al.apply_file(args.osm_pbf)
+    print(f"Top administrative level (alpha): {al.alfa} ({args.alfa})")
+    print(f"Middle administrative level (beta): {al.beta} ({args.beta})")
+    print(f"Lower administrative level (gamma): {al.gamma} ({args.gamma})")
+
+    if not (al.alfa and al.beta and al.gamma):
+        print("Not all administrative levels where found!")
+        sys.exit(1)
+
+    print("Looking for relations...")
+    osm_b = RelationHandler(al.alfa, al.beta, al.gamma)
     osm_b.apply_file(args.osm_pbf, locations=True, idx='flex_mem')
 
     print(f"Processing {args.osm_pbf}")
     print(f"I have found {len(osm_b.boundaries)} boundaries refering to {len(osm_b.lookup_ways)} ways ({len(set(osm_b.lookup_ways))} unique).")
     print(f"I will scan {args.osm_pbf} to collect these ways with coordinates")
 
+    print("Looking for ways and nodes with coordinates...")
     osm_w = WayHandler(osm_b.lookup_ways)
     osm_w.apply_file(args.osm_pbf, locations=True)
 
@@ -89,9 +129,9 @@ if __name__ == '__main__':
                                      description='Build a reverse GEO DB from OSM data')
     parser.add_argument('osm_pbf')
     parser.add_argument('out_db')
-    parser.add_argument('-a', help="Admin level 1")
-    parser.add_argument('-b', help="Admin level 2")
-    parser.add_argument('-c', help="Admin level 3")
+    parser.add_argument('--alfa')
+    parser.add_argument('--beta')
+    parser.add_argument('--gamma')
 
     args = parser.parse_args()
     main(args)
