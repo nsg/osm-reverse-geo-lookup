@@ -48,9 +48,9 @@ jobs:
           build_db.py
           europe-${{ matrix.country }}.osm.pbf
           europe-${{ matrix.country }}.json.db
-          -alfa "${{ matrix.admin_level_1 }}"
-          -beta "${{ matrix.admin_level_2 }}"
-          -gamma "${{ matrix.admin_level_3 }}"
+          --alfa "${{ matrix.admin_level_1 }}"
+          --beta "${{ matrix.admin_level_2 }}"
+          --gamma "${{ matrix.admin_level_3 }}"
       - name: Active outout
         uses: actions/upload-artifact@v3
         with:
