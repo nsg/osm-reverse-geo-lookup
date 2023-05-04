@@ -73,5 +73,5 @@ jobs:
         uses: actions/download-artifact@v3
 
       - name: List files
-        run: ls
+        run: find .
         
