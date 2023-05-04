@@ -8,49 +8,56 @@ on:
 
 jobs:
   build:
+    name: "Download & Process OSM data"
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         include:
-          - country: "sweden"
-            admin_level_1: "Sverige"
-            admin_level_2: "Stockholms län"
-            admin_level_3: "Stockholms kommun"
-          - country: "norway"
-            admin_level_1: "Norge"
-            admin_level_2: "Vestland"
-            admin_level_3: "Bergen"
-          - country: "finland"
-            admin_level_1: "Suomi / Finland"
-            admin_level_2: "Varsinais-Suomi"
-            admin_level_3: "Turku"
-          - country: "denmark"
-            admin_level_1: "Danmark"
-            admin_level_2: "Region Midtjylland"
-            admin_level_3: "Aarhus Kommune"
-          - country: "iceland"
-            admin_level_1: "Ísland"
-            admin_level_2: "Höfuðborgarsvæðið"
-            admin_level_3: "Reykjavíkurborg"
+          - country: "Sweden"
+            alfa: "Sverige"
+            beta: "Stockholms län"
+            gamma: "Stockholms kommun"
+            osm_source_file: "https://download.geofabrik.de/europe/sweden-latest.osm.pbf"
+
+          - country: "Norway"
+            alfa: "Norge"
+            beta: "Vestland"
+            gamma: "Bergen"
+            osm_source_file: "https://download.geofabrik.de/europe/norway-latest.osm.pbf"
+
+          - country: "Finland"
+            alfa: "Suomi / Finland"
+            beta: "Varsinais-Suomi"
+            gamma: "Turku"
+            osm_source_file: "https://download.geofabrik.de/europe/finland-latest.osm.pbf"
+
+          - country: "Denmark"
+            alfa: "Danmark"
+            beta: "Region Midtjylland"
+            gamma: "Aarhus Kommune"
+            osm_source_file: "https://download.geofabrik.de/europe/denmark-latest.osm.pbf"
+
+          - country: "Iceland"
+            alfa: "Ísland"
+            beta: "Höfuðborgarsvæðið"
+            gamma: "Reykjavíkurborg"
+            osm_source_file: "https://download.geofabrik.de/europe/iceland-latest.osm.pbf"
 
     steps:
       - uses: actions/checkout@v3
+
       - name: Install dependencies
         run: pip install -r requirements.txt
+
       - name: Download OSM data
-        run: >-
-          wget https://download.geofabrik.de/europe/${{ matrix.country }}-latest.osm.pbf
-          -O europe-${{ matrix.country }}.osm.pbf
+        run: wget ${{ matrix.osm_source_file }} -O europe-${{ matrix.country }}.osm.pbf
+
       - name: Process data
         run: >-
-          python3
-          build_db.py
-          europe-${{ matrix.country }}.osm.pbf
-          europe-${{ matrix.country }}.json.db
-          --alfa "${{ matrix.admin_level_1 }}"
-          --beta "${{ matrix.admin_level_2 }}"
-          --gamma "${{ matrix.admin_level_3 }}"
+          python3 build_db.py europe-${{ matrix.country }}.osm.pbf europe-${{ matrix.country }}.json.db
+          --alfa "${{ matrix.alfa }}" --beta "${{ matrix.beta }}" --gamma "${{ matrix.gamma }}"
+
       - name: Active outout
         uses: actions/upload-artifact@v3
         with:
@@ -58,6 +65,7 @@ jobs:
           path: europe-${{ matrix.country }}.json.db
 
   assemble:
+    name: "Assemble database"
     needs: build
     runs-on: ubuntu-latest
     steps:
