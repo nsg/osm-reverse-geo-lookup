@@ -36,37 +36,34 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - name: Cache downloaded OSM files
-        uses: actions/cache@v3
-        id: cache-${{ matrix.country }}
-        with:
-          path: "*.osm.pbf"
-
       - name: Download OSM data
         run: >-
           wget https://download.geofabrik.de/europe/${{ matrix.country }}-latest.osm.pbf
           -O europe-${{ matrix.country }}.osm.pbf
+      - name: Process data
+        run: >-
+          python3
+          build_db.py
+          europe-${{ matrix.country }}.osm.pbf
+          europe-${{ matrix.country }}.json.db
+          --alfa "${{ matrix.admin_level_1 }}"
+          --beta "${{ matrix.admin_level_2 }}"
+          --gamma "${{ matrix.admin_level_3 }}"
+      - name: Active outout
+        uses: actions/upload-artifact@v3
+        with:
+          name: nordic-countries
+          path: europe-${{ matrix.country }}.json.db
 
-  #     - name: Process data
-  #       run: >-
-  #         python3
-  #         build_db.py
-  #         europe-${{ matrix.country }}.osm.pbf
-  #         europe-${{ matrix.country }}.json.db
-  #         --alfa "${{ matrix.admin_level_1 }}"
-  #         --beta "${{ matrix.admin_level_2 }}"
-  #         --gamma "${{ matrix.admin_level_3 }}"
-  #     - name: Active outout
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: nordic-countries
-  #         path: europe-${{ matrix.country }}.json.db
-  # assemble:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: List files
+  assemble:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
+
+      - name: List files
+        run: ls
+        
