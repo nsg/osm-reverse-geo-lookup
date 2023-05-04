@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: "Download & Process OSM data"
+    name: "Build"
     runs-on: ubuntu-latest
 
     strategy:
@@ -65,7 +65,7 @@ jobs:
           path: europe-${{ matrix.country }}.json.db
 
   assemble:
-    name: "Assemble database"
+    name: "Assemble"
     needs: build
     runs-on: ubuntu-latest
     steps:
