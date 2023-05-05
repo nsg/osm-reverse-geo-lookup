@@ -11,7 +11,7 @@ There is a sample implementation in `query_db.py`. If you like to implement a so
 
 The database files contains lists of lists of polygons formated like this:
 
-```json
+```
 [
     [ <name>, <admin_level>, <polygon> ], ...
 ]
