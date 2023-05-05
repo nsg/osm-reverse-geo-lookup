@@ -85,3 +85,26 @@ jobs:
         with:
           name: nordic-countries
           path: world*json.db
+
+  simplify:
+    name: "Simplify"
+    needs: assemble
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Simplify Database
+        run: python simplify.py nordic-countries
+
+      - name: Active outout
+        uses: actions/upload-artifact@v3
+        with:
+          name: nordic-countries
+          path: "*simplified.json.db"
+

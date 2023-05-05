@@ -19,14 +19,12 @@ def process(folder):
             raise Exception(f"Unable to detect admin levels from file {f}")
 
         world_mappings = []
-        world_mappings_simplify = []
         for polygon in polygons:
             _, l, d = polygon
             if int(l) == admin1_level:
                 world_mappings.append((d, f))
-                world_mappings_simplify.append(list(Polygon(d).simplify(0.05).exterior.coords))
 
-    return world_mappings, world_mappings_simplify
+    return world_mappings
 
 
 def save(path, data):
@@ -38,7 +36,6 @@ parser.add_argument('input')
 parser.add_argument('outputprefix')
 args = parser.parse_args()
 
-data, simplified_data = process(args.input)
+data = process(args.input)
 
 save(f"{args.outputprefix}.json.db", data)
-save(f"{args.outputprefix}.simplified.json.db", simplified_data)

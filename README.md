@@ -2,6 +2,8 @@
 
 This project parses OpenStreetMap map data to build a database for reverse geographical lookups. In short, you can use this data to turn `{"latitude": 59.3371, "longitude": 17.9142}` to `{"admin1": "Sverige", "admin2": "Stockholms län", "admin3": "Stockholms kommun"}`.
 
+**PLEASE NOTE** THAT THIS IS AN UNFINISHED EXPERIMENT!
+
 ## Use the database
 
 There is a sample implementation in `query_db.py`. If you like to implement a solution of your own you need to:
