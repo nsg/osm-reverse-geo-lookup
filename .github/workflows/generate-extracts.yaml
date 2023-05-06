@@ -1,4 +1,4 @@
-name: Generate Nordic Countries
+name: Generate Extracts
 
 on:
   push:
@@ -10,6 +10,11 @@ jobs:
       max-parallel: 8
       matrix:
         include:
+
+          #
+          # List of extracts to process
+          #
+
           - country: "Sweden"
             alfa: "Sverige"
             beta: "Stockholms län"
@@ -40,11 +45,29 @@ jobs:
             gamma: "Reykjavíkurborg"
             osm_source_file: "https://download.geofabrik.de/europe/iceland-latest.osm.pbf"
 
-    uses: "./.github/workflows/generate.yaml"
+          #
+          # End of list
+          #
+
+    uses: "./.github/workflows/build.yaml"
     with:
       country: "${{ matrix.country }}"
       alfa: "${{ matrix.alfa }}"
       beta: "${{ matrix.beta }}"
       gamma: "${{ matrix.gamma }}"
       osm_source_file: "${{ matrix.osm_source_file }}"
-      artifact: "nordic-countries"
+      artifact: "database"
+
+  generate-world:
+    name: "Generate World"
+    needs: generate-build
+    uses: ./.github/workflows/world.yaml
+    with:
+      artifact: "database"
+
+  generate-simplify:
+    name: "Simplify"
+    needs: generate-world
+    uses: ./.github/workflows/simplify.yaml
+    with:
+      artifact: "database"
