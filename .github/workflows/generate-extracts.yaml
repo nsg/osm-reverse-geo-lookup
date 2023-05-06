@@ -58,16 +58,16 @@ jobs:
       osm_source_file: "${{ matrix.osm_source_file }}"
       artifact: "database"
 
-  generate-world:
+  world:
     name: "Generate World"
-    needs: generate-build
+    needs: build
     uses: ./.github/workflows/world.yaml
     with:
       artifact: "database"
 
-  generate-simplify:
+  simplify:
     name: "Simplify"
-    needs: generate-world
+    needs: world
     uses: ./.github/workflows/simplify.yaml
     with:
       artifact: "database"
