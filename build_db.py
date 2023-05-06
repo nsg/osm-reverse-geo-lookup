@@ -65,13 +65,13 @@ class AdminLevelsHandler(osmium.SimpleHandler):
         if r.tags.get("boundary") != "administrative":
             return
         
-        if r.tags.get("name") == self._alfa:
+        if r.tags.get("name") == self._alfa or r.tags.get("name:en") == self._alfa:
             self.alfa = r.tags.get("admin_level")
 
-        if r.tags.get("name") == self._beta:
+        if r.tags.get("name") == self._beta or r.tags.get("name:en") == self._beta:
             self.beta = r.tags.get("admin_level")
 
-        if r.tags.get("name") == self._gamma:
+        if r.tags.get("name") == self._gamma or r.tags.get("name") == self._gamma:
             self.gamma = r.tags.get("admin_level")
 
 
