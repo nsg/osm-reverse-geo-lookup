@@ -6,14 +6,15 @@ import os
 from shapely.geometry.polygon import Polygon
 
 parser = argparse.ArgumentParser(prog='simplify')
-parser.add_argument('folder')
+parser.add_argument('infolder')
+parser.add_argument('outfolder')
 args = parser.parse_args()
 
-for f in glob.glob(f"{args.folder}/*.json.db"):
+for f in glob.glob(f"{args.infolder}/*.json.db"):
     path_dir = os.path.dirname(f)
     path_name = os.path.basename(f)
     path_simple = path_name.replace(".json.db", ".simplified.json.db")
-    out_path = f"{path_dir}/{path_simple}"
+    out_path = f"{args.outfolder}/{path_simple}"
 
     if path_name.endswith(".simplified.json.db"):
         continue
