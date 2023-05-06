@@ -68,44 +68,12 @@ jobs:
   assemble:
     name: "Assemble"
     needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v3
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Assemble World Database
-        run: python assemble-world.py nordic-countries world
-        
-      - name: Active outout
-        uses: actions/upload-artifact@v3
-        with:
-          name: nordic-countries
-          path: world*json.db
+    uses: .github/workflows/world.yaml
+    with:
+      artifact: nordic-countries
 
   simplify:
-    name: "Simplify"
+    uses: .github/workflows/simplify.yaml
     needs: assemble
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v3
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Simplify Database
-        run: python simplify.py nordic-countries
-
-      - name: Active outout
-        uses: actions/upload-artifact@v3
-        with:
-          name: nordic-countries-simplified
-          path: "*simplified.json.db"
-
+    with:
+      artifact: nordic-countries

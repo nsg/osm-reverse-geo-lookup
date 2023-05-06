@@ -1,0 +1,31 @@
+name: Simplify polygons
+
+on:
+  workflow_call:
+    inputs:
+      artifact:
+        required: true
+        type: string
+
+jobs:
+  simplify:
+    name: "Simplify Polygons"
+    needs: assemble
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Simplify Database
+        run: python simplify.py ${{ inputs.artifact }}
+
+      - name: Active outout
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ inputs.artifact }}-simplified
+          path: "*simplified.json.db"

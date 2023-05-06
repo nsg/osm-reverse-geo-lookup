@@ -1,0 +1,30 @@
+name: Assemble World
+
+on:
+  workflow_call:
+    inputs:
+      artifact:
+        required: true
+        type: string
+
+jobs:
+  assemble:
+    name: "Assemble World"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Assemble World Database
+        run: python assemble-world.py ${{ inputs.artifact }} world
+        
+      - name: Active outout
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ inputs.artifact }}
+          path: world*json.db
