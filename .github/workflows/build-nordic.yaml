@@ -46,24 +46,14 @@ jobs:
             osm_source_file: "https://download.geofabrik.de/europe/iceland-latest.osm.pbf"
 
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Download OSM data
-        run: wget ${{ matrix.osm_source_file }} -O europe-${{ matrix.country }}.osm.pbf
-
-      - name: Process data
-        run: >-
-          python3 build_db.py europe-${{ matrix.country }}.osm.pbf europe-${{ matrix.country }}.json.db
-          --alfa "${{ matrix.alfa }}" --beta "${{ matrix.beta }}" --gamma "${{ matrix.gamma }}"
-
-      - name: Active outout
-        uses: actions/upload-artifact@v3
+      - uses: "./.github/workflows/build.yaml"
         with:
-          name: nordic-countries
-          path: europe-${{ matrix.country }}.json.db
+          country: "${{ matrix.country }}"
+          alfa: "${{ matrix.alfa }}"
+          beta: "${{ matrix.beta }}"
+          gamma: "${{ matrix.gamma }}"
+          osm_source_file: "${{ matrix.osm_source_file }}"
+          artifact: "nordic-countries"
 
   post:
     name: "Post Process"

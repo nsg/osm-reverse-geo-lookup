@@ -1,0 +1,46 @@
+name: Process Extract
+
+on:
+  workflow_call:
+    inputs:
+      country:
+        required: true
+        type: string
+      alfa:
+        required: true
+        type: string
+      beta:
+        required: true
+        type: string
+      gamma:
+        required: true
+        type: string
+      osm_source_file:
+        required: true
+        type: string
+      artifact:
+        required: true
+        type: string
+jobs:
+  build:
+    name: "Build"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Download OSM data
+        run: wget ${{ inputs.osm_source_file }} -O europe-${{ inputs.country }}.osm.pbf
+
+      - name: Process data
+        run: >-
+          python3 build_db.py europe-${{ inputs.country }}.osm.pbf europe-${{ inputs.country }}.json.db
+          --alfa "${{ inputs.alfa }}" --beta "${{ inputs.beta }}" --gamma "${{ inputs.gamma }}"
+
+      - name: Active outout
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ inputs.artifact }}
+          path: europe-${{ inputs.country }}.json.db
