@@ -45,15 +45,14 @@ jobs:
             gamma: "Reykjavíkurborg"
             osm_source_file: "https://download.geofabrik.de/europe/iceland-latest.osm.pbf"
 
-    steps:
-      - uses: "./.github/workflows/build.yaml"
-        with:
-          country: "${{ matrix.country }}"
-          alfa: "${{ matrix.alfa }}"
-          beta: "${{ matrix.beta }}"
-          gamma: "${{ matrix.gamma }}"
-          osm_source_file: "${{ matrix.osm_source_file }}"
-          artifact: "nordic-countries"
+      uses: "./.github/workflows/build.yaml"
+      with:
+        country: "${{ matrix.country }}"
+        alfa: "${{ matrix.alfa }}"
+        beta: "${{ matrix.beta }}"
+        gamma: "${{ matrix.gamma }}"
+        osm_source_file: "${{ matrix.osm_source_file }}"
+        artifact: "nordic-countries"
 
   post:
     name: "Post Process"
