@@ -105,6 +105,6 @@ jobs:
       - name: Active outout
         uses: actions/upload-artifact@v3
         with:
-          name: nordic-countries
+          name: nordic-countries-simplified
           path: "*simplified.json.db"
 
