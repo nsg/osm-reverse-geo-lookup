@@ -35,7 +35,7 @@ jobs:
       artifact: "${{ inputs.artifact }}"
 
   generate-world:
-    name: "Post Process"
+    name: "Generate World"
     runs-on: ubuntu-latest
     needs: generate-build
     steps:
