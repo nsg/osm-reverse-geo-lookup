@@ -45,6 +45,12 @@ jobs:
             gamma: "Reykjavíkurborg"
             osm_source_file: "https://download.geofabrik.de/europe/iceland-latest.osm.pbf"
 
+          - country: "Germany"
+            alfa: "Germany"
+            beta: "Mecklenburg-Vorpommern"
+            gamma: "Plau am See"
+            osm_source_file: "https://download.geofabrik.de/europe/germany-latest.osm.pbf"
+
           #
           # End of list
           #
