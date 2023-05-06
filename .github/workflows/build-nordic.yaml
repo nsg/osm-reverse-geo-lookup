@@ -65,16 +65,15 @@ jobs:
           name: nordic-countries
           path: europe-${{ matrix.country }}.json.db
 
-  assemble:
-    name: "Assemble"
+  post:
+    name: "Post"
+    runs-on: ubuntu-latest
     needs: build
-    uses: ./.github/workflows/world.yaml
-    with:
-      artifact: nordic-countries
+    steps:
+      - uses: ./.github/workflows/world.yaml
+        with:
+          artifact: nordic-countries
 
-  simplify:
-    name: "Simplefy"
-    needs: assemble
-    uses: ./.github/workflows/simplify.yaml
-    with:
-      artifact: nordic-countries
+      - uses: ./.github/workflows/simplify.yaml
+        with:
+          artifact: nordic-countries
