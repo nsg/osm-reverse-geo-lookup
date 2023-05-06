@@ -1,0 +1,53 @@
+name: Generate Extracts
+
+on:
+  workflow_call:
+    inputs:
+      country:
+        required: true
+        type: string
+      alfa:
+        required: true
+        type: string
+      beta:
+        required: true
+        type: string
+      gamma:
+        required: true
+        type: string
+      osm_source_file:
+        required: true
+        type: string
+      artifact:
+        required: true
+        type: string
+
+jobs:
+  generate-build:
+    name: "Build"
+    uses: "./.github/workflows/build.yaml"
+    with:
+      country: "${{ inputs.country }}"
+      alfa: "${{ inputs.alfa }}"
+      beta: "${{ inputs.beta }}"
+      gamma: "${{ inputs.gamma }}"
+      osm_source_file: "${{ inputs.osm_source_file }}"
+      artifact: "${{ inputs.artifact }}"
+
+  generate-world:
+    name: "Post Process"
+    runs-on: ubuntu-latest
+    needs: generate-build
+    steps:
+      - uses: ./.github/workflows/world.yaml
+        with:
+          artifact: "${{ inputs.artifact }}"
+
+  generate-simplify:
+    name: "Simplify"
+    runs-on: ubuntu-latest
+    needs: generate-world
+    steps:
+      - uses: ./.github/workflows/simplify.yaml
+        with:
+          artifact: "${{ inputs.artifact }}"

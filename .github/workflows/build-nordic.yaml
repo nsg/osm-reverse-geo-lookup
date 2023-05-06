@@ -4,8 +4,6 @@ on:
   push:
     branches: [ "master" ]
 
-  workflow_dispatch:
-
 jobs:
   build:
     strategy:
@@ -42,7 +40,7 @@ jobs:
             gamma: "Reykjavíkurborg"
             osm_source_file: "https://download.geofabrik.de/europe/iceland-latest.osm.pbf"
 
-    uses: "./.github/workflows/build.yaml"
+    uses: "./.github/workflows/generate.yaml"
     with:
       country: "${{ matrix.country }}"
       alfa: "${{ matrix.alfa }}"
@@ -50,16 +48,3 @@ jobs:
       gamma: "${{ matrix.gamma }}"
       osm_source_file: "${{ matrix.osm_source_file }}"
       artifact: "nordic-countries"
-
-  post:
-    name: "Post Process"
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: ./.github/workflows/world.yaml
-        with:
-          artifact: nordic-countries
-
-      - uses: ./.github/workflows/simplify.yaml
-        with:
-          artifact: nordic-countries
