@@ -44,8 +44,12 @@ class RelationHandler(osmium.SimpleHandler):
             for m in r.members:
                 ways.append(m.ref)
                 self.lookup_ways.append(m.ref)
-            self.boundaries.append((r.tags.get("name"), admin_level, ways))
-            print(f"Found {r.tags.get('name')} admin_level {admin_level}")
+            if r.tags.get("name:en"):
+                b_name = r.tags.get("name:en")
+            else:
+                b_name = r.tags.get("name")
+            self.boundaries.append((b_name, admin_level, ways))
+            print(f"Found {b_name} admin_level {admin_level}")
 
 class AdminLevelsHandler(osmium.SimpleHandler):
     def __init__(self, alfa, beta, gamma):
