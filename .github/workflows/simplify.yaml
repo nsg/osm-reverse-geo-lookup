@@ -8,9 +8,8 @@ on:
         type: string
 
 jobs:
-  simplify:
+  workflow-simplify:
     name: "Simplify Polygons"
-    needs: assemble
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

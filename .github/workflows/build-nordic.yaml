@@ -73,7 +73,8 @@ jobs:
       artifact: nordic-countries
 
   simplify:
-    uses: ./.github/workflows/simplify.yaml
+    name: "Simplefy"
     needs: assemble
+    uses: ./.github/workflows/simplify.yaml
     with:
       artifact: nordic-countries

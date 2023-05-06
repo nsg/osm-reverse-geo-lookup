@@ -8,7 +8,7 @@ on:
         type: string
 
 jobs:
-  assemble:
+  world:
     name: "Assemble World"
     runs-on: ubuntu-latest
     steps:
