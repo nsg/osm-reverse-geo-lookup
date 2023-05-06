@@ -23,8 +23,12 @@ for f in glob.glob(f"{args.folder}/*.json.db"):
     out = []
     data = json.load(open(f))
     for r in data:
-        rs = list(Polygon(r[2]).simplify(0.05).exterior.coords)
-        out.append([r[0], r[1], rs])
+        if path_name.startswith("world"):
+            rs = list(Polygon(r[0]).simplify(0.05).exterior.coords)
+            out.append([rs, r[1]])
+        else:
+            rs = list(Polygon(r[2]).simplify(0.05).exterior.coords)
+            out.append([r[0], r[1], rs])
 
     with open(out_path, "w") as outfile:
         outfile.write(json.dumps(out))
