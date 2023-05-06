@@ -66,7 +66,7 @@ jobs:
           path: europe-${{ matrix.country }}.json.db
 
   post:
-    name: "Post"
+    name: "Post Process"
     runs-on: ubuntu-latest
     needs: build
     steps:
