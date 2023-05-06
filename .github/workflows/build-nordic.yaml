@@ -68,12 +68,12 @@ jobs:
   assemble:
     name: "Assemble"
     needs: build
-    uses: .github/workflows/world.yaml@master
+    uses: ./.github/workflows/world.yaml
     with:
       artifact: nordic-countries
 
   simplify:
-    uses: .github/workflows/simplify.yaml@master
+    uses: ./.github/workflows/simplify.yaml
     needs: assemble
     with:
       artifact: nordic-countries
