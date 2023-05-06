@@ -15,6 +15,11 @@ for f in glob.glob(f"{args.folder}/*.json.db"):
     path_simple = path_name.replace(".json.db", ".simplified.json.db")
     out_path = f"{path_dir}/{path_simple}"
 
+    if path_name.endswith(".simplified.json.db"):
+        continue
+
+    print(f"Process {f} -> {out_path}")
+
     out = []
     data = json.load(open(f))
     for r in data:
