@@ -32,15 +32,15 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Download OSM data
-        run: wget ${{ inputs.osm_source_file }} -O europe-${{ inputs.country }}.osm.pbf
+        run: wget ${{ inputs.osm_source_file }} -O ${{ inputs.country }}.osm.pbf
 
       - name: Process data
         run: >-
-          python3 build_db.py europe-${{ inputs.country }}.osm.pbf europe-${{ inputs.country }}.json.db
+          python3 build_db.py ${{ inputs.country }}.osm.pbf ${{ inputs.country }}.json.db
           --alfa "${{ inputs.alfa }}" --beta "${{ inputs.beta }}" --gamma "${{ inputs.gamma }}"
 
       - name: Active outout
         uses: actions/upload-artifact@v3
         with:
           name: ${{ inputs.artifact }}
-          path: europe-${{ inputs.country }}.json.db
+          path: ${{ inputs.country }}.json.db
