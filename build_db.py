@@ -10,6 +10,13 @@ import osmium
 # OSM_PBF = "Stockholm.osm.pbf"
 # DB_FILE = "stockholm.db"
 
+def is_number(str):
+    try:
+        int(str)
+    except ValueError:
+        return False
+    return True
+
 class WayHandler(osmium.SimpleHandler):
     def __init__(self, lookup_ways):
         super().__init__()
@@ -58,18 +65,18 @@ class AdminLevelsHandler(osmium.SimpleHandler):
         self._beta = beta
         self._gamma = gamma
 
-        if type(alfa) == int:
-            self.alfa = alfa
+        if is_number(alfa):
+            self.alfa = int(alfa)
         else:
             self.alfa = None
 
-        if type(beta) == int:
-            self.beta = beta
+        if is_number(beta):
+            self.beta = int(beta)
         else:
             self.beta = None
 
-        if type(gamma) == int:
-            self.gamma = gamma
+        if is_number(gamma):
+            self.gamma = int(gamma)
         else:
             self.gamma = None
 
