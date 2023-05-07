@@ -31,13 +31,22 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Database Cache
+        id: database-cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ inputs.country }}.json.db
+          key: ${{ inputs.country }}-json-db
+
       - name: Download OSM data
         run: wget ${{ inputs.osm_source_file }} -O ${{ inputs.country }}.osm.pbf
+        if: ${{ steps.database-cache.outputs.cache-hit != 'true' }}
 
       - name: Process data
         run: >-
           python3 build_db.py ${{ inputs.country }}.osm.pbf ${{ inputs.country }}.json.db
           --alfa "${{ inputs.alfa }}" --beta "${{ inputs.beta }}" --gamma "${{ inputs.gamma }}"
+        if: ${{ steps.database-cache.outputs.cache-hit != 'true' }}
 
       - name: Active outout
         uses: actions/upload-artifact@v3
