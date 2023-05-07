@@ -11,7 +11,7 @@ jobs:
         include:
 
           #
-          # List of extracts to process
+          # List of extracts to process, see the ADD_EXTRACT.md for more information
           #
 
           - country: "Sweden"
