@@ -23,7 +23,7 @@ The database files contains lists of lists of polygons formated like this:
 
 ## Build the database
 
-`build_db.py` is used to parse an extracts of OSM data. I use extracts from https://download.geofabrik.de to generate the json.db-files. `assemble-world.py` is used to generate `world.json.db`.
+`build_db.py` is used to parse an extracts of OSM data. I use extracts from https://download.geofabrik.de to generate the json.db-files. `assemble-world.py` is used to generate `world.json.db`, and `simplify.py` creates the simplified files.
 
 The "simplified" files are files with reduced polygon counts. This reduces the file sizes and speeds things up, but with the drawback of lost resolution at polygon borders. It's quite safe to try to use the simplified files first, and fall back to the larger file.
 
