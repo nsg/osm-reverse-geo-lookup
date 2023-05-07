@@ -66,17 +66,17 @@ class AdminLevelsHandler(osmium.SimpleHandler):
         self._gamma = gamma
 
         if is_number(alfa):
-            self.alfa = int(alfa)
+            self.alfa = alfa
         else:
             self.alfa = None
 
         if is_number(beta):
-            self.beta = int(beta)
+            self.beta = beta
         else:
             self.beta = None
 
         if is_number(gamma):
-            self.gamma = int(gamma)
+            self.gamma = gamma
         else:
             self.gamma = None
 
