@@ -14,29 +14,29 @@ jobs:
           # List of extracts to process, see the ADD_EXTRACT.md for more information
           #
 
-          - country: "Sweden"
-            alfa: "Sverige"
-            beta: "Stockholms län"
-            gamma: "Stockholms kommun"
-            osm_source_file: "https://download.geofabrik.de/europe/sweden-latest.osm.pbf"
+          # - country: "Sweden"
+          #   alfa: "Sverige"
+          #   beta: "Stockholms län"
+          #   gamma: "Stockholms kommun"
+          #   osm_source_file: "https://download.geofabrik.de/europe/sweden-latest.osm.pbf"
 
-          - country: "Norway"
-            alfa: "Norge"
-            beta: "Vestland"
-            gamma: "Bergen"
-            osm_source_file: "https://download.geofabrik.de/europe/norway-latest.osm.pbf"
+          # - country: "Norway"
+          #   alfa: "Norge"
+          #   beta: "Vestland"
+          #   gamma: "Bergen"
+          #   osm_source_file: "https://download.geofabrik.de/europe/norway-latest.osm.pbf"
 
-          - country: "Finland"
-            alfa: "Suomi / Finland"
-            beta: "Varsinais-Suomi"
-            gamma: "Turku"
-            osm_source_file: "https://download.geofabrik.de/europe/finland-latest.osm.pbf"
+          # - country: "Finland"
+          #   alfa: "Suomi / Finland"
+          #   beta: "Varsinais-Suomi"
+          #   gamma: "Turku"
+          #   osm_source_file: "https://download.geofabrik.de/europe/finland-latest.osm.pbf"
 
-          - country: "Denmark"
-            alfa: "Danmark"
-            beta: "Region Midtjylland"
-            gamma: "Aarhus Kommune"
-            osm_source_file: "https://download.geofabrik.de/europe/denmark-latest.osm.pbf"
+          # - country: "Denmark"
+          #   alfa: "Danmark"
+          #   beta: "Region Midtjylland"
+          #   gamma: "Aarhus Kommune"
+          #   osm_source_file: "https://download.geofabrik.de/europe/denmark-latest.osm.pbf"
 
           - country: "Iceland"
             alfa: "Ísland"
@@ -44,83 +44,83 @@ jobs:
             gamma: "Reykjavíkurborg"
             osm_source_file: "https://download.geofabrik.de/europe/iceland-latest.osm.pbf"
 
-          - country: "Germany-Baden-Württemberg"
-            alfa: "Germany"
-            beta: 4
-            gamma: 6
-            osm_source_file: "https://download.geofabrik.de/europe/germany/baden-wuerttemberg-latest.osm.pbf"
+          # - country: "Germany-Baden-Württemberg"
+          #   alfa: "Germany"
+          #   beta: 4
+          #   gamma: 6
+          #   osm_source_file: "https://download.geofabrik.de/europe/germany/baden-wuerttemberg-latest.osm.pbf"
 
-          - country: "Germany-Bayern"
-            alfa: "Germany"
-            beta: 4
-            gamma: 6
-            osm_source_file: "https://download.geofabrik.de/europe/germany/bayern-latest.osm.pbf"
+          # - country: "Germany-Bayern"
+          #   alfa: "Germany"
+          #   beta: 4
+          #   gamma: 6
+          #   osm_source_file: "https://download.geofabrik.de/europe/germany/bayern-latest.osm.pbf"
 
-          - country: "Germany-Brandenburg"
-            alfa: "Germany"
-            beta: 4
-            gamma: 6
-            osm_source_file: "https://download.geofabrik.de/europe/germany/brandenburg-latest.osm.pbf"
+          # - country: "Germany-Brandenburg"
+          #   alfa: "Germany"
+          #   beta: 4
+          #   gamma: 6
+          #   osm_source_file: "https://download.geofabrik.de/europe/germany/brandenburg-latest.osm.pbf"
 
-          - country: "Germany-Hessen"
-            alfa: "Germany"
-            beta: 4
-            gamma: 6
-            osm_source_file: "https://download.geofabrik.de/europe/germany/hessen-latest.osm.pbf"
+          # - country: "Germany-Hessen"
+          #   alfa: "Germany"
+          #   beta: 4
+          #   gamma: 6
+          #   osm_source_file: "https://download.geofabrik.de/europe/germany/hessen-latest.osm.pbf"
 
-          - country: "Germany-Mecklenburg-Vorpommern"
-            alfa: "Germany"
-            beta: 4
-            gamma: 6
-            osm_source_file: "https://download.geofabrik.de/europe/germany/mecklenburg-vorpommern-latest.osm.pbf"
+          # - country: "Germany-Mecklenburg-Vorpommern"
+          #   alfa: "Germany"
+          #   beta: 4
+          #   gamma: 6
+          #   osm_source_file: "https://download.geofabrik.de/europe/germany/mecklenburg-vorpommern-latest.osm.pbf"
 
-          - country: "Germany-Niedersachsen"
-            alfa: "Germany"
-            beta: 4
-            gamma: 6
-            osm_source_file: "https://download.geofabrik.de/europe/germany/niedersachsen-latest.osm.pbf"
+          # - country: "Germany-Niedersachsen"
+          #   alfa: "Germany"
+          #   beta: 4
+          #   gamma: 6
+          #   osm_source_file: "https://download.geofabrik.de/europe/germany/niedersachsen-latest.osm.pbf"
 
-          - country: "Germany-Nordrhein-Westfalen"
-            alfa: "Germany"
-            beta: 4
-            gamma: 6
-            osm_source_file: "https://download.geofabrik.de/europe/germany/nordrhein-westfalen-latest.osm.pbf"
+          # - country: "Germany-Nordrhein-Westfalen"
+          #   alfa: "Germany"
+          #   beta: 4
+          #   gamma: 6
+          #   osm_source_file: "https://download.geofabrik.de/europe/germany/nordrhein-westfalen-latest.osm.pbf"
 
-          - country: "Germany-Rheinland-Pfalz"
-            alfa: "Germany"
-            beta: 4
-            gamma: 6
-            osm_source_file: "https://download.geofabrik.de/europe/germany/rheinland-pfalz-latest.osm.pbf"
+          # - country: "Germany-Rheinland-Pfalz"
+          #   alfa: "Germany"
+          #   beta: 4
+          #   gamma: 6
+          #   osm_source_file: "https://download.geofabrik.de/europe/germany/rheinland-pfalz-latest.osm.pbf"
 
-          - country: "Germany-Saarland"
-            alfa: "Germany"
-            beta: 4
-            gamma: 6
-            osm_source_file: "https://download.geofabrik.de/europe/germany/saarland-latest.osm.pbf"
+          # - country: "Germany-Saarland"
+          #   alfa: "Germany"
+          #   beta: 4
+          #   gamma: 6
+          #   osm_source_file: "https://download.geofabrik.de/europe/germany/saarland-latest.osm.pbf"
 
-          - country: "Germany-Sachsen"
-            alfa: "Germany"
-            beta: 4
-            gamma: 6
-            osm_source_file: "https://download.geofabrik.de/europe/germany/sachsen-latest.osm.pbf"
+          # - country: "Germany-Sachsen"
+          #   alfa: "Germany"
+          #   beta: 4
+          #   gamma: 6
+          #   osm_source_file: "https://download.geofabrik.de/europe/germany/sachsen-latest.osm.pbf"
 
-          - country: "Germany-Sachsen-Anhalt"
-            alfa: "Germany"
-            beta: 4
-            gamma: 6
-            osm_source_file: "https://download.geofabrik.de/europe/germany/sachsen-anhalt-latest.osm.pbf"
+          # - country: "Germany-Sachsen-Anhalt"
+          #   alfa: "Germany"
+          #   beta: 4
+          #   gamma: 6
+          #   osm_source_file: "https://download.geofabrik.de/europe/germany/sachsen-anhalt-latest.osm.pbf"
 
-          - country: "Germany-Schleswig-Holstein"
-            alfa: "Germany"
-            beta: 4
-            gamma: 6
-            osm_source_file: "https://download.geofabrik.de/europe/germany/schleswig-holstein-latest.osm.pbf"
+          # - country: "Germany-Schleswig-Holstein"
+          #   alfa: "Germany"
+          #   beta: 4
+          #   gamma: 6
+          #   osm_source_file: "https://download.geofabrik.de/europe/germany/schleswig-holstein-latest.osm.pbf"
 
-          - country: "Germany-Thüringen"
-            alfa: "Germany"
-            beta: 4
-            gamma: 6
-            osm_source_file: "https://download.geofabrik.de/europe/germany/thueringen-latest.osm.pbf"
+          # - country: "Germany-Thüringen"
+          #   alfa: "Germany"
+          #   beta: 4
+          #   gamma: 6
+          #   osm_source_file: "https://download.geofabrik.de/europe/germany/thueringen-latest.osm.pbf"
 
           #
           # End of list
