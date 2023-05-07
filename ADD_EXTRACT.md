@@ -35,7 +35,7 @@ Fork the repository, modify `.github/workflows/generate-extracts.yaml` and open 
   osm_source_file: "https://download.geofabrik.de/europe/norway-latest.osm.pbf"
 ```
 
-`country` should be the English name of the country. `Alfa`, `beta` and `gamma` needs to refer to the tag `name` (local name, like Norge) or the tag `name:en` (english name, like Norway).
+`country` should be the English name of the country. `Alfa`, `beta` and `gamma` needs to refer to the tag `name` (local name, like Norge) or the tag `name:en` (english name, like Norway). You can also use the administrative level number directly if you prefer, like `alfa: 2`.
 
 ## 4. Wait or ask me to regenerate the database
 

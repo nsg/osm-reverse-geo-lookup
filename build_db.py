@@ -58,9 +58,20 @@ class AdminLevelsHandler(osmium.SimpleHandler):
         self._beta = beta
         self._gamma = gamma
 
-        self.alfa = None
-        self.beta = None
-        self.gamma = None
+        if type(alfa) == int:
+            self.alfa = alfa
+        else:
+            self.alfa = None
+
+        if type(beta) == int:
+            self.beta = beta
+        else:
+            self.beta = None
+
+        if type(gamma) == int:
+            self.gamma = gamma
+        else:
+            self.gamma = None
 
     def relation(self, r):
         if r.tags.get("type") != "boundary":
