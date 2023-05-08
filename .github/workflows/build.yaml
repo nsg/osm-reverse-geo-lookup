@@ -36,7 +36,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ inputs.country }}.json.db
-          key: ${{ inputs.country }}-json-db
+          key: ${{ inputs.country }}-json-db-2
 
       - name: Download OSM data
         run: wget ${{ inputs.osm_source_file }} -O ${{ inputs.country }}.osm.pbf
