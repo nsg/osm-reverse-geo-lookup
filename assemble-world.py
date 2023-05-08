@@ -1,3 +1,4 @@
+import os
 import json
 import glob
 import argparse
@@ -7,6 +8,7 @@ from shapely.geometry.polygon import Polygon
 def process(folder):
     world_mappings = []
     for f in glob.glob(f"{folder}/*.json.db"):
+        path_name = os.path.basename(f)
         polygons = json.load(open(f))
 
         # Find country admin level, this is probably 2
@@ -23,7 +25,7 @@ def process(folder):
         for polygon in polygons:
             _, l, d = polygon
             if int(l) == admin1_level:
-                world_mappings.append((d, f))
+                world_mappings.append((d, path_name))
 
     return world_mappings
 
