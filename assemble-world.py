@@ -11,21 +11,18 @@ def process(folder):
         path_name = os.path.basename(f)
         polygons = json.load(open(f))
 
-        # Find country admin level, this is probably 2
-        admin1_level = 10
+        # Collect a sorted list of admin levels
+        admin_levels = []
+        for polygon in polygons:
+            admin_levels.append(polygon[1])
+        admin_levels = list(set(admin_levels))
+        admin_levels.sort()
+
+        print(f"Process {f}, use admin_level {admin_levels[0]}")
         for polygon in polygons:
             _, l, d = polygon
-            if int(l) < admin1_level:
-                admin1_level = int(l)
-
-        if admin1_level == 10:
-            raise Exception(f"Unable to detect admin levels from file {f}")
-
-        print(f"Process {f}, use admin_level {admin1_level}")
-        for polygon in polygons:
-            _, l, d = polygon
-            if int(l) == admin1_level:
-                world_mappings.append((d, path_name))
+            if l == admin_levels[0]:
+                world_mappings.append((d, path_name, admin_levels))
 
     return world_mappings
 
