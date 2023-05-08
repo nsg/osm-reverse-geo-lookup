@@ -5,6 +5,7 @@ import argparse
 from shapely.geometry.polygon import Polygon
 
 def process(folder):
+    world_mappings = []
     for f in glob.glob(f"{folder}/*.json.db"):
         polygons = json.load(open(f))
 
@@ -19,7 +20,6 @@ def process(folder):
             raise Exception(f"Unable to detect admin levels from file {f}")
 
         print(f"Process {f}, use admin_level {admin1_level}")
-        world_mappings = []
         for polygon in polygons:
             _, l, d = polygon
             if int(l) == admin1_level:
