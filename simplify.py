@@ -27,7 +27,7 @@ for f in glob.glob(f"{args.infolder}/*.json.db"):
     for r in data:
         if path_name.startswith("world"):
             rs = list(Polygon(r[0]).simplify(args.value).exterior.coords)
-            out.append([rs, r[1]])
+            out.append([rs, r[1], r[2]])
         else:
             rs = list(Polygon(r[2]).simplify(args.value).exterior.coords)
             out.append([r[0], r[1], rs])
