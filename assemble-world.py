@@ -18,6 +18,7 @@ def process(folder):
         if admin1_level == 10:
             raise Exception(f"Unable to detect admin levels from file {f}")
 
+        print(f"Process {f}, use admin_level {admin1_level}")
         world_mappings = []
         for polygon in polygons:
             _, l, d = polygon
