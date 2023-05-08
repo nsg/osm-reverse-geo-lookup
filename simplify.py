@@ -8,6 +8,7 @@ from shapely.geometry.polygon import Polygon
 parser = argparse.ArgumentParser(prog='simplify')
 parser.add_argument('infolder')
 parser.add_argument('outfolder')
+parser.add_argument('--value', default=0.05, type=int)
 args = parser.parse_args()
 
 for f in glob.glob(f"{args.infolder}/*.json.db"):
@@ -25,10 +26,10 @@ for f in glob.glob(f"{args.infolder}/*.json.db"):
     data = json.load(open(f))
     for r in data:
         if path_name.startswith("world"):
-            rs = list(Polygon(r[0]).simplify(0.05).exterior.coords)
+            rs = list(Polygon(r[0]).simplify(args.value).exterior.coords)
             out.append([rs, r[1]])
         else:
-            rs = list(Polygon(r[2]).simplify(0.05).exterior.coords)
+            rs = list(Polygon(r[2]).simplify(args.value).exterior.coords)
             out.append([r[0], r[1], rs])
 
     with open(out_path, "w") as outfile:
