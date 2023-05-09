@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>Demo</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+        crossorigin=""></script>
+        <style>
+            #map { height: 100% }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+    </body>
+    <script>
+        var map = L.map('map').setView([59.3372, 17.9487], 6);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        var popup = L.popup();
+
+        function onMapClick(e) {
+            popup.setLatLng(e.latlng).setContent("--longitude " + e.latlng.lat.toString() + " --latitude " + e.latlng.lng.toString()).openOn(map);
+        }
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.round(Math.random() * 15)];
+            }
+            return color;
+        }
+
+        map.on('click', onMapClick);
+
+        fetch('./simplified/world.simplified.json.db').then((response) => response.json()).then((json) =>
+            json.forEach(element => {
+                console.log(element)
+                var polyline = L.polyline(element[0], {color: getRandomColor()}).addTo(map);
+            })
+        )
+
+    </script>
+</html>
