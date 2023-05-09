@@ -20,9 +20,10 @@ def process(folder):
 
         print(f"Process {f}, use admin_level {admin_levels[0]}")
         for polygon in polygons:
-            _, l, d = polygon
+            n, l, d = polygon
             if l == admin_levels[0]:
-                world_mappings.append((d, path_name, admin_levels))
+                if os.path.basename(f).startswith(n):
+                    world_mappings.append((d, path_name, admin_levels))
 
     return world_mappings
 
